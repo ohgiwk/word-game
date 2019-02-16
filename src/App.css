@@ -1,7 +1,14 @@
 .word {
-  text-align: center;
+  margin: 2rem;
+  padding: 3rem 0;
+  font-size: 1.4rem;
 }
 
 .character {
   margin: 1rem;
+  font-size: 2rem;
+}
+
+.input-character-form {
+  margin: 2rem 0;
 }

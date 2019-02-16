@@ -1,4 +1,10 @@
+// @ts-check
 import React, { Component } from 'react';
+import { Grid } from '@material-ui/core';
+
+import AppHeader from './components/AppHeader';
+import GamePanel from './components/GamePanel';
+
 import './App.css';
 
 // 辞書サイトからスクレイピング
@@ -7,39 +13,17 @@ import './App.css';
 // selenium
 
 class App extends Component {
-  _word = 'hello';
-  _selectedChar = [];
-
-  constructor(props) {
-    super(props);
-
-    this.check = this.check.bind(this);
-  }
-
-  check(char) {
-    console.log('check');
-    this._selectedChar.push(char);
-  }
-
   render() {
-    const word = 'hello';
-    const inputStyle = { border: 'solid, black 1px' };
-
     return (
       <div className="App">
-        <div className="word">
-          {word.split('').map((w, i) => {
-            const c = this._selectedChar.indexOf(w) > 0 ? w : '_';
-            return (
-              <span key={i} className="character">
-                {c}
-              </span>
-            );
-          })}
-        </div>
-        <input type="text" maxLength="1" style={inputStyle} />
-
-        <button onClick={this.check}>チェック</button>
+        <Grid container justify="center">
+          <Grid item xs={12}>
+            <AppHeader />
+          </Grid>
+          <Grid item xs={11} sm={6}>
+            <GamePanel />
+          </Grid>
+        </Grid>
       </div>
     );
   }
