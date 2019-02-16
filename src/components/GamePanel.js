@@ -6,7 +6,7 @@ import InputArea from './InputArea';
 export default class GamePanel extends React.Component {
   constructor(props) {
     super(props);
-    const word = 'hello';
+    const word = 'Architecture';
 
     this.state = {
       word: word.toUpperCase(),
@@ -104,7 +104,7 @@ export default class GamePanel extends React.Component {
 
     if (selectedChar.indexOf(inputChar) >= 0) {
       this.setState({
-        text: `${inputChar} is already exists.`
+        text: `${inputChar} is already Chosen.`
       });
       return false;
     }
@@ -149,12 +149,11 @@ export default class GamePanel extends React.Component {
           <Typography align="center">miss: {mistakeCount} / 5</Typography>
           <InputArea
             inputChar={inputChar}
-            gameClear={gameClear}
-            gameOver={gameOver}
+            disabled={gameClear || gameOver}
             onChangeInput={this.onChangeInput}
             onClickCheckButton={this.check}
           />
-          <Typography align="center">選択済みのアルファベット</Typography>
+          <Typography align="center">Already Chosen</Typography>
           <Typography align="center">
             {selectedChar.map((c, i) => {
               return <span key={i}>{c.toUpperCase()}</span>;

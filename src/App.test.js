@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import AppHeader from './components/AppHeader';
+import GamePanel from './components/GamePanel';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -13,13 +15,11 @@ describe('App test', () => {
     ReactDOM.unmountComponentAtNode(div);
   });
 
-  // it('', () => {
-  //   const wrapper = shallow(<App />);
-
-  //   const buttonWrapper = wrapper.find('Grid');
-  //   // expect(buttonWrapper).toBe(true);
-  //   expect(buttonWrapper).toHaveLength(0);
-  // });
+  it('has child Components', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find(AppHeader).length).toBe(1);
+    expect(wrapper.find(GamePanel).length).toBe(1);
+  });
 });
 
 //

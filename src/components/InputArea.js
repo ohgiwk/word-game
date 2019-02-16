@@ -2,10 +2,10 @@ import React from 'react';
 import { Input, Button, Grid } from '@material-ui/core';
 
 export default function InputArea(props) {
-  const { inputChar, gameClear, gameOver } = props;
+  const { inputChar, disabled } = props;
 
   return (
-    <Grid container className="input-character-form" justify="center">
+    <Grid container style={{ margin: '2rem 0' }} justify="center">
       <Grid item xs={3}>
         <Input
           type="text"
@@ -20,7 +20,7 @@ export default function InputArea(props) {
           variant="contained"
           onClick={props.onClickCheckButton}
           style={{ marginLeft: '2rem' }}
-          disabled={gameClear || gameOver}
+          disabled={disabled}
         >
           CHECK
         </Button>
