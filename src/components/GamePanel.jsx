@@ -1,10 +1,24 @@
+/* @flow */
 import React from 'react';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import WordArea from './WordArea';
 import InputArea from './InputArea';
 
-export default class GamePanel extends React.Component {
-  constructor(props) {
+type Props = {};
+
+type State = {
+  word: string,
+  selectedChar: string[],
+  inputChar: string,
+  checkChar: string,
+  mistakeCount: number,
+  gameOver: boolean,
+  gameClear: boolean,
+  text: string
+};
+
+export default class GamePanel extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     const word = 'Architecture';
 
@@ -18,9 +32,6 @@ export default class GamePanel extends React.Component {
       gameClear: false,
       text: ''
     };
-
-    this.check = this.check.bind(this);
-    this.onChangeInput = this.onChangeInput.bind(this);
   }
 
   get isGameClear() {
@@ -33,7 +44,7 @@ export default class GamePanel extends React.Component {
    * @returns boolean
    * @memberof App
    */
-  isCharExist(checkChar) {
+  isCharExist(checkChar: string) {
     const { word } = this.state;
     return word.toUpperCase().indexOf(checkChar) >= 0;
   }
@@ -43,7 +54,7 @@ export default class GamePanel extends React.Component {
    * @returns
    * @memberof App
    */
-  isAlphabet(char) {
+  isAlphabet(char: string) {
     const result = /[A-Z]/.exec(char);
     return !!result;
   }
@@ -96,7 +107,7 @@ export default class GamePanel extends React.Component {
     }, 3000);
   }
 
-  validation(inputChar) {
+  validation(inputChar: string) {
     const { gameOver, gameClear, selectedChar } = this.state;
     if (inputChar === '' || gameOver || gameClear) {
       return false;
@@ -122,7 +133,7 @@ export default class GamePanel extends React.Component {
    *
    * @param {Object} event
    */
-  onChangeInput(event) {
+  onChangeInput(event: Object) {
     const char = event.target.value;
     this.setState({
       inputChar: char.toUpperCase()
@@ -150,14 +161,14 @@ export default class GamePanel extends React.Component {
           <InputArea
             inputChar={inputChar}
             disabled={gameClear || gameOver}
-            onChangeInput={this.onChangeInput}
-            onClickCheckButton={this.check}
+            onChangeInput={this.onChangeInput.bind(this)}
+            onClickCheckButton={this.check.bind(this)}
           />
           <Typography align="center">Already Chosen</Typography>
           <Typography align="center">
-            {selectedChar.map((c, i) => {
-              return <span key={i}>{c.toUpperCase()}</span>;
-            })}
+            {selectedChar.map((c, i) => (
+              <span key={i}>{c.toUpperCase()}</span>
+            ))}
           </Typography>
         </CardContent>
       </Card>
